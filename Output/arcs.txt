@@ -1,0 +1,8 @@
+nmod(máy_bay->nào), nsub(đi->máy_bay), root(root->đi), nmod(huế->thành_phố), nmod(huế->đến), dobj(đi->huế), nmod(13:30->lúc), tmod(đi->13:30), nmod(13:30->hr)
+
+nmod(máy_bay->nào), nsub(đi->máy_bay), root(root->đi), nmod(đà_nẵng->từ), dobj(đi->đà_nẵng), nmod(hồ_chí_minh->thành_phố), nmod(hồ_chí_minh->đến), dobj(đi->hồ_chí_minh), tmod(hr->1), nmod(hr->mất)
+
+adv(cho_biết->hãy), det(máy_bay->các), nmod(máy_bay->mã_hiệu), nsub(đi->máy_bay), xcomp(đi->cho_biết), root(root->đi), nmod(huế->đến), dobj(đi->huế)
+
+nmod(máy_bay->nào), nsub(đi->máy_bay), root(root->đi), nmod(hồ_chí_minh->thành_phố), nmod(hồ_chí_minh->từ), dobj(đi->hồ_chí_minh), punc(đi->,), nmod(mấy->lúc), tmod(đi->mấy), nmod(mấy->hr), punc(đi->?)
+

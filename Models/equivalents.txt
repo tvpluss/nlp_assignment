@@ -1,0 +1,4 @@
+bay,xuất_phát->đi
+hạ_cánh_ở->đến
+tp.->thành_phố
+giờ->hr
