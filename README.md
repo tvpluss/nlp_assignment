@@ -2,9 +2,9 @@
 # NLP Assignment
 BÀI TẬP LỚN MÔN HỌC XLNNTN LỚP CAO HỌC CNTT HK242
 Trương Vĩnh Phước - 2470506
-## Setup
+## Development
 Develop on Mac M1, python 3.13.2
-
+Using `lark` package to tokenize input to list of tokens, included in requirements.txt
 ## Quick run
 Run
 ```bash

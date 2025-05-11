@@ -35,7 +35,7 @@ with open("Input/query.txt", "r") as f:
             print('manual break')
             break
         try:
-            print(f'line: {line}'.strip())
+            print(f'Query {index}: {line}'.strip())
             preprocessed_query = preprocess_query(line)
             tokens = parser.lex(preprocessed_query)
             postprocessed_tokens = postprocess_tokens(tokens)
@@ -52,8 +52,9 @@ with open("Input/query.txt", "r") as f:
             procedure_form_parser = ProcedureFormParser(logical_form, index)
             procedure_form = procedure_form_parser.parse()
 
-            print('\n\n')
 
         except Exception as e:
-            print(f'line {line} error: {e}')
+            print(f'error: {e}')
+        finally:
+            print('\n')
 
