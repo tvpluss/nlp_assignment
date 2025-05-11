@@ -1,40 +1,72 @@
 Question 1:
-PRINT_ALL ?m1 (FLIGHT ?m1 (RUN-TIME ?m1 đà_nẵng hồ_chí_minh))
-Question 2:
-PRINT_ALL ?m1 (FLIGHT ?m1 (RUN-TIME ?m1 hồ_chí_minh đà_nẵng))
-Question 3:
 PRINT_ALL ?m1 (FLIGHT ?m1 (AT-TIME ?m1 huế 13:30hr))
+
+
+Question 2:
+PRINT_ALL ?m1 (FLIGHT ?m1 (RUN-TIME ?m1 đà_nẵng hồ_chí_minh))
+
+
+Question 3:
+PRINT_ALL ?m1 (FLIGHT ?m1 (AT-TIME ?m1 huế ))
+
+
 Question 4:
-PRINT_ALL ?m1 (FLIGHT ?m1 (RUN-TIME ?m1 đà_nẵng khánh_hòa ?t1))
+PRINT_ALL ?m1 (FLIGHT ?m1 (DEPARTURE-TIME ?m1 hồ_chí_minh ))
+
+
 Question 5:
 PRINT_ALL ?m1 (FLIGHT ?m1 (RUN-TIME ?m1 hồ_chí_minh hà_nội))
+
+
 Question 6:
-PRINT_ALL ?m1 (FLIGHT ?m1 (AT-TIME ?m1 huế ))
-Question 7:
-PRINT_ALL ?m1 (FLIGHT ?m1 (DEPARTURE-TIME ?m1 hồ_chí_minh ))
-Question 8:
-PRINT_ALL ?m1 (FLIGHT ?m1 (RUN-TIME ?m1 hồ_chí_minh hà_nội))
-Question 9:
 PRINT_ALL ?m1 (FLIGHT vn4 (DEPARTURE-TIME ?m1 đà_nẵng ))
-Question 10:
+
+
+Question 7:
 PRINT_ALL ?m1 (FLIGHT vj5 (RUN-TIME ?m1 hà_nội khánh_hòa))
-Question 11:
+
+
+Question 8:
 PRINT_ALL ?m1 (FLIGHT ?m1 (DEPARTURE-TIME ?m1 hải_phòng ))
-Question 12:
+
+
+Question 9:
 PRINT_ALL ?m1 (FLIGHT ?m1
-Question 13:
+
+
+Question 10:
 PRINT_ALL ?m1 (FLIGHT ?m1 (RUN-TIME ?m1 hải_phòng khánh_hòa))
-Question 14:
+
+
+Question 11:
 PRINT_ALL ?m1 (FLIGHT vj1
-Question 15:
+
+
+Question 12:
+PRINT_ALL ?m1 (FLIGHT ?m1 (RUN-TIME ?m1 hồ_chí_minh đà_nẵng))
+
+
+Question 13:
 PRINT_ALL ?m1 (FLIGHT ?m1 (RUN-TIME ?m1  huế))
-Question 16:
+
+
+Question 14:
 PRINT_ALL ?m1 (FLIGHT vj5 (DEPARTURE-TIME ?m1 hà_nội ))
-Question 17:
+
+
+Question 15:
 PRINT_ALL ?m1 (FLIGHT ?m1 (AT-TIME ?m1 huế ))
-Question 19:
+
+
+Question 17:
 PRINT_ALL ?m1 (FLIGHT ?m1 (RUN-TIME ?m1 đà_nẵng khánh_hòa ?t1))
-Question 20:
+
+
+Question 18:
 PRINT_ALL ?m1 (FLIGHT vn2 (DEPARTURE-TIME ?m1 đà_nẵng ))
-Question 22:
+
+
+Question 20:
 PRINT_ALL ?m1 (FLIGHT ?m1 (RUN-TIME ?m1 hà_nội hồ_chí_minh))
+
+

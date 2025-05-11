@@ -1,5 +1,13 @@
 Question 1:
 which(máy_bay->nào)                      -> (WHICH m1 máy_bay)
+nsub(đến->máy_bay)                       -> (m1 PRED đến)(m1 LSUB máy_bay)
+to-loc(đến->huế)                         -> (m1 TO-LOC thành_phố-huế)
+nmod(huế->thành_phố)                    
+at-time(đến->13:30hr)                    -> (m1 AT-TIME 13:30hr)
+
+
+Question 2:
+which(máy_bay->nào)                      -> (WHICH m1 máy_bay)
 nsub(bay->máy_bay)                       -> (m1 PRED bay)(m1 LSUB máy_bay)
 from-loc(từ->đà_nẵng)                    -> (m1 FROM-LOC đà_nẵng)
 to-loc(đến->hồ_chí_minh)                 -> (m1 TO-LOC thành_phố-hồ_chí_minh)
@@ -7,29 +15,16 @@ nmod(hồ_chí_minh->thành_phố)
 run-time(mất->1:00hr)                    -> (m1 RUN-TIME 1:00hr)
 
 
-Question 2:
-which(máy_bay->nào)                      -> (WHICH m1 máy_bay)
-nsub(bay->máy_bay)                       -> (m1 PRED bay)(m1 LSUB máy_bay)
-from-loc(từ->hồ_chí_minh)                -> (m1 FROM-LOC thành_phố-hồ_chí_minh)
-nmod(hồ_chí_minh->thành_phố)            
-to-loc(đến->đà_nẵng)                     -> (m1 TO-LOC đà_nẵng)
-run-time(mất->1:00hr)                    -> (m1 RUN-TIME 1:00hr)
-
-
 Question 3:
-which(máy_bay->nào)                      -> (WHICH m1 máy_bay)
 nsub(đến->máy_bay)                       -> (m1 PRED đến)(m1 LSUB máy_bay)
-to-loc(đến->huế)                         -> (m1 TO-LOC thành_phố-huế)
-nmod(huế->thành_phố)                    
-at-time(đến->13:30hr)                    -> (m1 AT-TIME 13:30hr)
+to-loc(đến->huế)                         -> (m1 TO-LOC huế)
 
 
 Question 4:
 which(máy_bay->nào)                      -> (WHICH m1 máy_bay)
 nsub(bay->máy_bay)                       -> (m1 PRED bay)(m1 LSUB máy_bay)
-from-loc(từ->đà_nẵng)                    -> (m1 FROM-LOC đà_nẵng)
-to-loc(ra->khánh_hòa)                    -> (m1 TO-LOC khánh_hòa)
-wh-time(bay->bao_lâu)                    -> (WH-TIME m1)
+from-loc(từ->hồ_chí_minh)                -> (m1 FROM-LOC thành_phố-hồ_chí_minh)
+nmod(hồ_chí_minh->thành_phố)            
 
 
 Question 5:
@@ -41,48 +36,28 @@ to-loc(đến->hà_nội)                      -> (m1 TO-LOC hà_nội)
 
 
 Question 6:
-nsub(đến->máy_bay)                       -> (m1 PRED đến)(m1 LSUB máy_bay)
-to-loc(đến->huế)                         -> (m1 TO-LOC huế)
-
-
-Question 7:
-which(máy_bay->nào)                      -> (WHICH m1 máy_bay)
-nsub(bay->máy_bay)                       -> (m1 PRED bay)(m1 LSUB máy_bay)
-from-loc(từ->hồ_chí_minh)                -> (m1 FROM-LOC thành_phố-hồ_chí_minh)
-nmod(hồ_chí_minh->thành_phố)            
-
-
-Question 8:
-which(máy_bay->nào)                      -> (WHICH m1 máy_bay)
-nsub(bay->máy_bay)                       -> (m1 PRED bay)(m1 LSUB máy_bay)
-from-loc(từ->hồ_chí_minh)                -> (m1 FROM-LOC thành_phố-hồ_chí_minh)
-nmod(hồ_chí_minh->thành_phố)            
-to-loc(đến->hà_nội)                      -> (m1 TO-LOC hà_nội)
-
-
-Question 9:
 nsub(bay->máy_bay)                       -> (m1 PRED bay)(m1 LSUB (NAME vn4))
 from-loc(từ->đà_nẵng)                    -> (m1 FROM-LOC đà_nẵng)
 
 
-Question 10:
+Question 7:
 nsub(bay->máy_bay)                       -> (m1 PRED bay)(m1 LSUB (NAME vj5))
 from-loc(từ->hà_nội)                     -> (m1 FROM-LOC thành_phố-hà_nội)
 nmod(hà_nội->thành_phố)                 
 to-loc(đến->khánh_hòa)                   -> (m1 TO-LOC khánh_hòa)
 
 
-Question 11:
+Question 8:
 which(máy_bay->nào)                      -> (WHICH m1 máy_bay)
 nsub(bay->máy_bay)                       -> (m1 PRED bay)(m1 LSUB máy_bay)
 from-loc(từ->hải_phòng)                  -> (m1 FROM-LOC hải_phòng)
 
 
-Question 12:
+Question 9:
 nsub(bay->máy_bay)                       -> (m1 PRED bay)(m1 LSUB máy_bay)
 
 
-Question 13:
+Question 10:
 which(máy_bay->nào)                      -> (WHICH m1 máy_bay)
 nsub(bay->máy_bay)                       -> (m1 PRED bay)(m1 LSUB máy_bay)
 from-loc(từ->hải_phòng)                  -> (m1 FROM-LOC hải_phòng)
@@ -90,11 +65,20 @@ to-loc(đến->hải_phòng)                   -> (m1 TO-LOC hải_phòng)
 to-loc(đến->khánh_hòa)                   -> (m1 TO-LOC khánh_hòa)
 
 
-Question 14:
+Question 11:
 nsub(bay->máy_bay)                       -> (m1 PRED bay)(m1 LSUB (NAME vj1))
 
 
-Question 15:
+Question 12:
+which(máy_bay->nào)                      -> (WHICH m1 máy_bay)
+nsub(bay->máy_bay)                       -> (m1 PRED bay)(m1 LSUB máy_bay)
+from-loc(từ->hồ_chí_minh)                -> (m1 FROM-LOC thành_phố-hồ_chí_minh)
+nmod(hồ_chí_minh->thành_phố)            
+to-loc(đến->đà_nẵng)                     -> (m1 TO-LOC đà_nẵng)
+run-time(mất->1:00hr)                    -> (m1 RUN-TIME 1:00hr)
+
+
+Question 13:
 which(máy_bay->nào)                      -> (WHICH m1 máy_bay)
 which(máy_bay->nào)                      -> (WHICH m1 máy_bay)
 nsub(bay->máy_bay)                       -> (m1 PRED bay)(m1 LSUB máy_bay)
@@ -102,18 +86,18 @@ to-loc(ra->huế)                          -> (m1 TO-LOC huế)
 run-time(mất->1:00hr)                    -> (m1 RUN-TIME 1:00hr)
 
 
-Question 16:
+Question 14:
 nsub(bay->máy_bay)                       -> (m1 PRED bay)(m1 LSUB (NAME vj5))
 from-loc(từ->hà_nội)                     -> (m1 FROM-LOC hà_nội)
 
 
-Question 17:
+Question 15:
 which(máy_bay->nào)                      -> (WHICH m1 máy_bay)
 nsub(đến->máy_bay)                       -> (m1 PRED đến)(m1 LSUB máy_bay)
 to-loc(đến->huế)                         -> (m1 TO-LOC huế)
 
 
-Question 19:
+Question 17:
 which(máy_bay->nào)                      -> (WHICH m1 máy_bay)
 nsub(bay->máy_bay)                       -> (m1 PRED bay)(m1 LSUB máy_bay)
 from-loc(từ->đà_nẵng)                    -> (m1 FROM-LOC đà_nẵng)
@@ -121,12 +105,12 @@ to-loc(ra->khánh_hòa)                    -> (m1 TO-LOC khánh_hòa)
 wh-time(bay->bao_lâu)                    -> (WH-TIME m1)
 
 
-Question 20:
+Question 18:
 nsub(bay->máy_bay)                       -> (m1 PRED bay)(m1 LSUB (NAME vn2))
 from-loc(từ->đà_nẵng)                    -> (m1 FROM-LOC đà_nẵng)
 
 
-Question 22:
+Question 20:
 which(máy_bay->nào)                      -> (WHICH m1 máy_bay)
 nsub(bay->máy_bay)                       -> (m1 PRED bay)(m1 LSUB máy_bay)
 from-loc(từ->hà_nội)                     -> (m1 FROM-LOC hà_nội)

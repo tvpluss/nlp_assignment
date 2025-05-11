@@ -1,5 +1,24 @@
 Question 1:
 ACTION                    STACK                                    BUFFER                                                                                               ARCS
+                           [root]                                   [máy_bay, nào, đến, thành_phố, huế, lúc, 13:30hr, ?]                                                 []
+SHIFT                      [root, máy_bay]                          [nào, đến, thành_phố, huế, lúc, 13:30hr, ?]                                                          []
+RA which                   [root, máy_bay, nào]                     [đến, thành_phố, huế, lúc, 13:30hr, ?]                                                               [which(máy_bay->nào)]
+REDUCE                     [root, máy_bay]                          [đến, thành_phố, huế, lúc, 13:30hr, ?]                                                               [which(máy_bay->nào)]
+LA nsub                    [root]                                   [đến, thành_phố, huế, lúc, 13:30hr, ?]                                                               [which(máy_bay->nào), nsub(đến->máy_bay)]
+RA root                    [root, đến]                              [thành_phố, huế, lúc, 13:30hr, ?]                                                                    [which(máy_bay->nào), nsub(đến->máy_bay), root(root->đến)]
+SHIFT                      [root, đến, thành_phố]                   [huế, lúc, 13:30hr, ?]                                                                               [which(máy_bay->nào), nsub(đến->máy_bay), root(root->đến)]
+LA nmod                    [root, đến]                              [huế, lúc, 13:30hr, ?]                                                                               [which(máy_bay->nào), nsub(đến->máy_bay), root(root->đến), nmod(huế->thành_phố)]
+RA to-loc                  [root, đến, huế]                         [lúc, 13:30hr, ?]                                                                                    [which(máy_bay->nào), nsub(đến->máy_bay), root(root->đến), nmod(huế->thành_phố), to-loc(đến->huế)]
+REDUCE                     [root, đến]                              [lúc, 13:30hr, ?]                                                                                    [which(máy_bay->nào), nsub(đến->máy_bay), root(root->đến), nmod(huế->thành_phố), to-loc(đến->huế)]
+SHIFT                      [root, đến, lúc]                         [13:30hr, ?]                                                                                         [which(máy_bay->nào), nsub(đến->máy_bay), root(root->đến), nmod(huế->thành_phố), to-loc(đến->huế)]
+LA case                    [root, đến]                              [13:30hr, ?]                                                                                         [which(máy_bay->nào), nsub(đến->máy_bay), root(root->đến), nmod(huế->thành_phố), to-loc(đến->huế), case(13:30hr->lúc)]
+RA at-time                 [root, đến, 13:30hr]                     [?]                                                                                                  [which(máy_bay->nào), nsub(đến->máy_bay), root(root->đến), nmod(huế->thành_phố), to-loc(đến->huế), case(13:30hr->lúc), at-time(đến->13:30hr)]
+REDUCE                     [root, đến]                              [?]                                                                                                  [which(máy_bay->nào), nsub(đến->máy_bay), root(root->đến), nmod(huế->thành_phố), to-loc(đến->huế), case(13:30hr->lúc), at-time(đến->13:30hr)]
+RA punc                    [root, đến, ?]                           []                                                                                                   [which(máy_bay->nào), nsub(đến->máy_bay), root(root->đến), nmod(huế->thành_phố), to-loc(đến->huế), case(13:30hr->lúc), at-time(đến->13:30hr), punc(đến->?)]
+
+
+Question 2:
+ACTION                    STACK                                    BUFFER                                                                                               ARCS
                            [root]                                   [máy_bay, nào, bay, từ, đà_nẵng, đến, thành_phố, hồ_chí_minh, mất, 1:00hr, ?]                        []
 SHIFT                      [root, máy_bay]                          [nào, bay, từ, đà_nẵng, đến, thành_phố, hồ_chí_minh, mất, 1:00hr, ?]                                 []
 RA which                   [root, máy_bay, nào]                     [bay, từ, đà_nẵng, đến, thành_phố, hồ_chí_minh, mất, 1:00hr, ?]                                      [which(máy_bay->nào)]
@@ -21,69 +40,40 @@ REDUCE                     [root, bay, từ, đến]                     [?]    
 RA punc                    [root, bay, từ, đến, ?]                  []                                                                                                   [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), from-loc(từ->đà_nẵng), nmod(hồ_chí_minh->thành_phố), to-loc(đến->hồ_chí_minh), run-time(mất->1:00hr), punc(đến->?)]
 
 
-Question 2:
-ACTION                    STACK                                    BUFFER                                                                                               ARCS
-                           [root]                                   [máy_bay, nào, bay, từ, thành_phố, hồ_chí_minh, đến, đà_nẵng, mất, 1:00hr, ?]                        []
-SHIFT                      [root, máy_bay]                          [nào, bay, từ, thành_phố, hồ_chí_minh, đến, đà_nẵng, mất, 1:00hr, ?]                                 []
-RA which                   [root, máy_bay, nào]                     [bay, từ, thành_phố, hồ_chí_minh, đến, đà_nẵng, mất, 1:00hr, ?]                                      [which(máy_bay->nào)]
-REDUCE                     [root, máy_bay]                          [bay, từ, thành_phố, hồ_chí_minh, đến, đà_nẵng, mất, 1:00hr, ?]                                      [which(máy_bay->nào)]
-LA nsub                    [root]                                   [bay, từ, thành_phố, hồ_chí_minh, đến, đà_nẵng, mất, 1:00hr, ?]                                      [which(máy_bay->nào), nsub(bay->máy_bay)]
-RA root                    [root, bay]                              [từ, thành_phố, hồ_chí_minh, đến, đà_nẵng, mất, 1:00hr, ?]                                           [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay)]
-SHIFT                      [root, bay, từ]                          [thành_phố, hồ_chí_minh, đến, đà_nẵng, mất, 1:00hr, ?]                                               [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay)]
-SHIFT                      [root, bay, từ, thành_phố]               [hồ_chí_minh, đến, đà_nẵng, mất, 1:00hr, ?]                                                          [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay)]
-LA nmod                    [root, bay, từ]                          [hồ_chí_minh, đến, đà_nẵng, mất, 1:00hr, ?]                                                          [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), nmod(hồ_chí_minh->thành_phố)]
-RA from-loc                [root, bay, từ, hồ_chí_minh]             [đến, đà_nẵng, mất, 1:00hr, ?]                                                                       [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), nmod(hồ_chí_minh->thành_phố), from-loc(từ->hồ_chí_minh)]
-REDUCE                     [root, bay, từ]                          [đến, đà_nẵng, mất, 1:00hr, ?]                                                                       [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), nmod(hồ_chí_minh->thành_phố), from-loc(từ->hồ_chí_minh)]
-SHIFT                      [root, bay, từ, đến]                     [đà_nẵng, mất, 1:00hr, ?]                                                                            [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), nmod(hồ_chí_minh->thành_phố), from-loc(từ->hồ_chí_minh)]
-RA to-loc                  [root, bay, từ, đến, đà_nẵng]            [mất, 1:00hr, ?]                                                                                     [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), nmod(hồ_chí_minh->thành_phố), from-loc(từ->hồ_chí_minh), to-loc(đến->đà_nẵng)]
-REDUCE                     [root, bay, từ, đến]                     [mất, 1:00hr, ?]                                                                                     [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), nmod(hồ_chí_minh->thành_phố), from-loc(từ->hồ_chí_minh), to-loc(đến->đà_nẵng)]
-SHIFT                      [root, bay, từ, đến, mất]                [1:00hr, ?]                                                                                          [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), nmod(hồ_chí_minh->thành_phố), from-loc(từ->hồ_chí_minh), to-loc(đến->đà_nẵng)]
-RA run-time                [root, bay, từ, đến, mất, 1:00hr]        [?]                                                                                                  [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), nmod(hồ_chí_minh->thành_phố), from-loc(từ->hồ_chí_minh), to-loc(đến->đà_nẵng), run-time(mất->1:00hr)]
-REDUCE                     [root, bay, từ, đến, mất]                [?]                                                                                                  [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), nmod(hồ_chí_minh->thành_phố), from-loc(từ->hồ_chí_minh), to-loc(đến->đà_nẵng), run-time(mất->1:00hr)]
-REDUCE                     [root, bay, từ, đến]                     [?]                                                                                                  [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), nmod(hồ_chí_minh->thành_phố), from-loc(từ->hồ_chí_minh), to-loc(đến->đà_nẵng), run-time(mất->1:00hr)]
-RA punc                    [root, bay, từ, đến, ?]                  []                                                                                                   [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), nmod(hồ_chí_minh->thành_phố), from-loc(từ->hồ_chí_minh), to-loc(đến->đà_nẵng), run-time(mất->1:00hr), punc(đến->?)]
-
-
 Question 3:
 ACTION                    STACK                                    BUFFER                                                                                               ARCS
-                           [root]                                   [máy_bay, nào, đến, thành_phố, huế, lúc, 13:30hr, ?]                                                 []
-SHIFT                      [root, máy_bay]                          [nào, đến, thành_phố, huế, lúc, 13:30hr, ?]                                                          []
-RA which                   [root, máy_bay, nào]                     [đến, thành_phố, huế, lúc, 13:30hr, ?]                                                               [which(máy_bay->nào)]
-REDUCE                     [root, máy_bay]                          [đến, thành_phố, huế, lúc, 13:30hr, ?]                                                               [which(máy_bay->nào)]
-LA nsub                    [root]                                   [đến, thành_phố, huế, lúc, 13:30hr, ?]                                                               [which(máy_bay->nào), nsub(đến->máy_bay)]
-RA root                    [root, đến]                              [thành_phố, huế, lúc, 13:30hr, ?]                                                                    [which(máy_bay->nào), nsub(đến->máy_bay), root(root->đến)]
-SHIFT                      [root, đến, thành_phố]                   [huế, lúc, 13:30hr, ?]                                                                               [which(máy_bay->nào), nsub(đến->máy_bay), root(root->đến)]
-LA nmod                    [root, đến]                              [huế, lúc, 13:30hr, ?]                                                                               [which(máy_bay->nào), nsub(đến->máy_bay), root(root->đến), nmod(huế->thành_phố)]
-RA to-loc                  [root, đến, huế]                         [lúc, 13:30hr, ?]                                                                                    [which(máy_bay->nào), nsub(đến->máy_bay), root(root->đến), nmod(huế->thành_phố), to-loc(đến->huế)]
-REDUCE                     [root, đến]                              [lúc, 13:30hr, ?]                                                                                    [which(máy_bay->nào), nsub(đến->máy_bay), root(root->đến), nmod(huế->thành_phố), to-loc(đến->huế)]
-SHIFT                      [root, đến, lúc]                         [13:30hr, ?]                                                                                         [which(máy_bay->nào), nsub(đến->máy_bay), root(root->đến), nmod(huế->thành_phố), to-loc(đến->huế)]
-LA case                    [root, đến]                              [13:30hr, ?]                                                                                         [which(máy_bay->nào), nsub(đến->máy_bay), root(root->đến), nmod(huế->thành_phố), to-loc(đến->huế), case(13:30hr->lúc)]
-RA at-time                 [root, đến, 13:30hr]                     [?]                                                                                                  [which(máy_bay->nào), nsub(đến->máy_bay), root(root->đến), nmod(huế->thành_phố), to-loc(đến->huế), case(13:30hr->lúc), at-time(đến->13:30hr)]
-REDUCE                     [root, đến]                              [?]                                                                                                  [which(máy_bay->nào), nsub(đến->máy_bay), root(root->đến), nmod(huế->thành_phố), to-loc(đến->huế), case(13:30hr->lúc), at-time(đến->13:30hr)]
-RA punc                    [root, đến, ?]                           []                                                                                                   [which(máy_bay->nào), nsub(đến->máy_bay), root(root->đến), nmod(huế->thành_phố), to-loc(đến->huế), case(13:30hr->lúc), at-time(đến->13:30hr), punc(đến->?)]
+                           [root]                                   [mã_hiệu, các, máy_bay, đến, huế, ?]                                                                 []
+SHIFT                      [root, mã_hiệu]                          [các, máy_bay, đến, huế, ?]                                                                          []
+REDUCE                     [root]                                   [các, máy_bay, đến, huế, ?]                                                                          []
+SHIFT                      [root, các]                              [máy_bay, đến, huế, ?]                                                                               []
+LA det                     [root]                                   [máy_bay, đến, huế, ?]                                                                               [det(máy_bay->các)]
+SHIFT                      [root, máy_bay]                          [đến, huế, ?]                                                                                        [det(máy_bay->các)]
+LA nsub                    [root]                                   [đến, huế, ?]                                                                                        [det(máy_bay->các), nsub(đến->máy_bay)]
+RA root                    [root, đến]                              [huế, ?]                                                                                             [det(máy_bay->các), nsub(đến->máy_bay), root(root->đến)]
+RA to-loc                  [root, đến, huế]                         [?]                                                                                                  [det(máy_bay->các), nsub(đến->máy_bay), root(root->đến), to-loc(đến->huế)]
+REDUCE                     [root, đến]                              [?]                                                                                                  [det(máy_bay->các), nsub(đến->máy_bay), root(root->đến), to-loc(đến->huế)]
+RA punc                    [root, đến, ?]                           []                                                                                                   [det(máy_bay->các), nsub(đến->máy_bay), root(root->đến), to-loc(đến->huế), punc(đến->?)]
 
 
 Question 4:
 ACTION                    STACK                                    BUFFER                                                                                               ARCS
-                           [root]                                   [máy_bay, nào, bay, từ, đà_nẵng, ra, khánh_hòa, thời_gian, bao_lâu, ?]                               []
-SHIFT                      [root, máy_bay]                          [nào, bay, từ, đà_nẵng, ra, khánh_hòa, thời_gian, bao_lâu, ?]                                        []
-RA which                   [root, máy_bay, nào]                     [bay, từ, đà_nẵng, ra, khánh_hòa, thời_gian, bao_lâu, ?]                                             [which(máy_bay->nào)]
-REDUCE                     [root, máy_bay]                          [bay, từ, đà_nẵng, ra, khánh_hòa, thời_gian, bao_lâu, ?]                                             [which(máy_bay->nào)]
-LA nsub                    [root]                                   [bay, từ, đà_nẵng, ra, khánh_hòa, thời_gian, bao_lâu, ?]                                             [which(máy_bay->nào), nsub(bay->máy_bay)]
-RA root                    [root, bay]                              [từ, đà_nẵng, ra, khánh_hòa, thời_gian, bao_lâu, ?]                                                  [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay)]
-SHIFT                      [root, bay, từ]                          [đà_nẵng, ra, khánh_hòa, thời_gian, bao_lâu, ?]                                                      [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay)]
-RA from-loc                [root, bay, từ, đà_nẵng]                 [ra, khánh_hòa, thời_gian, bao_lâu, ?]                                                               [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), from-loc(từ->đà_nẵng)]
-REDUCE                     [root, bay, từ]                          [ra, khánh_hòa, thời_gian, bao_lâu, ?]                                                               [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), from-loc(từ->đà_nẵng)]
-SHIFT                      [root, bay, từ, ra]                      [khánh_hòa, thời_gian, bao_lâu, ?]                                                                   [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), from-loc(từ->đà_nẵng)]
-RA to-loc                  [root, bay, từ, ra, khánh_hòa]           [thời_gian, bao_lâu, ?]                                                                              [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), from-loc(từ->đà_nẵng), to-loc(ra->khánh_hòa)]
-REDUCE                     [root, bay, từ, ra]                      [thời_gian, bao_lâu, ?]                                                                              [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), from-loc(từ->đà_nẵng), to-loc(ra->khánh_hòa)]
-REDUCE                     [root, bay, từ]                          [thời_gian, bao_lâu, ?]                                                                              [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), from-loc(từ->đà_nẵng), to-loc(ra->khánh_hòa)]
-REDUCE                     [root, bay]                              [thời_gian, bao_lâu, ?]                                                                              [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), from-loc(từ->đà_nẵng), to-loc(ra->khánh_hòa)]
-SHIFT                      [root, bay, thời_gian]                   [bao_lâu, ?]                                                                                         [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), from-loc(từ->đà_nẵng), to-loc(ra->khánh_hòa)]
-LA nmod                    [root, bay]                              [bao_lâu, ?]                                                                                         [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), from-loc(từ->đà_nẵng), to-loc(ra->khánh_hòa), nmod(bao_lâu->thời_gian)]
-RA wh-time                 [root, bay, bao_lâu]                     [?]                                                                                                  [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), from-loc(từ->đà_nẵng), to-loc(ra->khánh_hòa), nmod(bao_lâu->thời_gian), wh-time(bay->bao_lâu)]
-REDUCE                     [root, bay]                              [?]                                                                                                  [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), from-loc(từ->đà_nẵng), to-loc(ra->khánh_hòa), nmod(bao_lâu->thời_gian), wh-time(bay->bao_lâu)]
-RA punc                    [root, bay, ?]                           []                                                                                                   [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), from-loc(từ->đà_nẵng), to-loc(ra->khánh_hòa), nmod(bao_lâu->thời_gian), wh-time(bay->bao_lâu), punc(bay->?)]
+                           [root]                                   [máy_bay, nào, bay, từ, thành_phố, hồ_chí_minh, lúc, mấy:00hr, ?]                                    []
+SHIFT                      [root, máy_bay]                          [nào, bay, từ, thành_phố, hồ_chí_minh, lúc, mấy:00hr, ?]                                             []
+RA which                   [root, máy_bay, nào]                     [bay, từ, thành_phố, hồ_chí_minh, lúc, mấy:00hr, ?]                                                  [which(máy_bay->nào)]
+REDUCE                     [root, máy_bay]                          [bay, từ, thành_phố, hồ_chí_minh, lúc, mấy:00hr, ?]                                                  [which(máy_bay->nào)]
+LA nsub                    [root]                                   [bay, từ, thành_phố, hồ_chí_minh, lúc, mấy:00hr, ?]                                                  [which(máy_bay->nào), nsub(bay->máy_bay)]
+RA root                    [root, bay]                              [từ, thành_phố, hồ_chí_minh, lúc, mấy:00hr, ?]                                                       [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay)]
+SHIFT                      [root, bay, từ]                          [thành_phố, hồ_chí_minh, lúc, mấy:00hr, ?]                                                           [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay)]
+SHIFT                      [root, bay, từ, thành_phố]               [hồ_chí_minh, lúc, mấy:00hr, ?]                                                                      [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay)]
+LA nmod                    [root, bay, từ]                          [hồ_chí_minh, lúc, mấy:00hr, ?]                                                                      [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), nmod(hồ_chí_minh->thành_phố)]
+RA from-loc                [root, bay, từ, hồ_chí_minh]             [lúc, mấy:00hr, ?]                                                                                   [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), nmod(hồ_chí_minh->thành_phố), from-loc(từ->hồ_chí_minh)]
+REDUCE                     [root, bay, từ]                          [lúc, mấy:00hr, ?]                                                                                   [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), nmod(hồ_chí_minh->thành_phố), from-loc(từ->hồ_chí_minh)]
+REDUCE                     [root, bay]                              [lúc, mấy:00hr, ?]                                                                                   [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), nmod(hồ_chí_minh->thành_phố), from-loc(từ->hồ_chí_minh)]
+SHIFT                      [root, bay, lúc]                         [mấy:00hr, ?]                                                                                        [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), nmod(hồ_chí_minh->thành_phố), from-loc(từ->hồ_chí_minh)]
+REDUCE                     [root, bay]                              [mấy:00hr, ?]                                                                                        [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), nmod(hồ_chí_minh->thành_phố), from-loc(từ->hồ_chí_minh)]
+SHIFT                      [root, bay, mấy:00hr]                    [?]                                                                                                  [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), nmod(hồ_chí_minh->thành_phố), from-loc(từ->hồ_chí_minh)]
+REDUCE                     [root, bay]                              [?]                                                                                                  [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), nmod(hồ_chí_minh->thành_phố), from-loc(từ->hồ_chí_minh)]
+RA punc                    [root, bay, ?]                           []                                                                                                   [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), nmod(hồ_chí_minh->thành_phố), from-loc(từ->hồ_chí_minh), punc(bay->?)]
 
 
 Question 5:
@@ -107,70 +97,20 @@ RA punc                    [root, bay, từ, đến, ?]                  []     
 
 Question 6:
 ACTION                    STACK                                    BUFFER                                                                                               ARCS
-                           [root]                                   [mã_hiệu, các, máy_bay, đến, huế, ?]                                                                 []
-SHIFT                      [root, mã_hiệu]                          [các, máy_bay, đến, huế, ?]                                                                          []
-REDUCE                     [root]                                   [các, máy_bay, đến, huế, ?]                                                                          []
-SHIFT                      [root, các]                              [máy_bay, đến, huế, ?]                                                                               []
-LA det                     [root]                                   [máy_bay, đến, huế, ?]                                                                               [det(máy_bay->các)]
-SHIFT                      [root, máy_bay]                          [đến, huế, ?]                                                                                        [det(máy_bay->các)]
-LA nsub                    [root]                                   [đến, huế, ?]                                                                                        [det(máy_bay->các), nsub(đến->máy_bay)]
-RA root                    [root, đến]                              [huế, ?]                                                                                             [det(máy_bay->các), nsub(đến->máy_bay), root(root->đến)]
-RA to-loc                  [root, đến, huế]                         [?]                                                                                                  [det(máy_bay->các), nsub(đến->máy_bay), root(root->đến), to-loc(đến->huế)]
-REDUCE                     [root, đến]                              [?]                                                                                                  [det(máy_bay->các), nsub(đến->máy_bay), root(root->đến), to-loc(đến->huế)]
-RA punc                    [root, đến, ?]                           []                                                                                                   [det(máy_bay->các), nsub(đến->máy_bay), root(root->đến), to-loc(đến->huế), punc(đến->?)]
+                           [root]                                   [máy_bay, vn4, bay, từ, đà_nẵng, ?]                                                                  []
+SHIFT                      [root, máy_bay]                          [vn4, bay, từ, đà_nẵng, ?]                                                                           []
+RA nmod                    [root, máy_bay, vn4]                     [bay, từ, đà_nẵng, ?]                                                                                [nmod(máy_bay->vn4)]
+REDUCE                     [root, máy_bay]                          [bay, từ, đà_nẵng, ?]                                                                                [nmod(máy_bay->vn4)]
+LA nsub                    [root]                                   [bay, từ, đà_nẵng, ?]                                                                                [nmod(máy_bay->vn4), nsub(bay->máy_bay)]
+RA root                    [root, bay]                              [từ, đà_nẵng, ?]                                                                                     [nmod(máy_bay->vn4), nsub(bay->máy_bay), root(root->bay)]
+SHIFT                      [root, bay, từ]                          [đà_nẵng, ?]                                                                                         [nmod(máy_bay->vn4), nsub(bay->máy_bay), root(root->bay)]
+RA from-loc                [root, bay, từ, đà_nẵng]                 [?]                                                                                                  [nmod(máy_bay->vn4), nsub(bay->máy_bay), root(root->bay), from-loc(từ->đà_nẵng)]
+REDUCE                     [root, bay, từ]                          [?]                                                                                                  [nmod(máy_bay->vn4), nsub(bay->máy_bay), root(root->bay), from-loc(từ->đà_nẵng)]
+REDUCE                     [root, bay]                              [?]                                                                                                  [nmod(máy_bay->vn4), nsub(bay->máy_bay), root(root->bay), from-loc(từ->đà_nẵng)]
+RA punc                    [root, bay, ?]                           []                                                                                                   [nmod(máy_bay->vn4), nsub(bay->máy_bay), root(root->bay), from-loc(từ->đà_nẵng), punc(bay->?)]
 
 
 Question 7:
-ACTION                    STACK                                    BUFFER                                                                                               ARCS
-                           [root]                                   [máy_bay, nào, bay, từ, thành_phố, hồ_chí_minh, lúc, mấy:00hr, ?]                                    []
-SHIFT                      [root, máy_bay]                          [nào, bay, từ, thành_phố, hồ_chí_minh, lúc, mấy:00hr, ?]                                             []
-RA which                   [root, máy_bay, nào]                     [bay, từ, thành_phố, hồ_chí_minh, lúc, mấy:00hr, ?]                                                  [which(máy_bay->nào)]
-REDUCE                     [root, máy_bay]                          [bay, từ, thành_phố, hồ_chí_minh, lúc, mấy:00hr, ?]                                                  [which(máy_bay->nào)]
-LA nsub                    [root]                                   [bay, từ, thành_phố, hồ_chí_minh, lúc, mấy:00hr, ?]                                                  [which(máy_bay->nào), nsub(bay->máy_bay)]
-RA root                    [root, bay]                              [từ, thành_phố, hồ_chí_minh, lúc, mấy:00hr, ?]                                                       [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay)]
-SHIFT                      [root, bay, từ]                          [thành_phố, hồ_chí_minh, lúc, mấy:00hr, ?]                                                           [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay)]
-SHIFT                      [root, bay, từ, thành_phố]               [hồ_chí_minh, lúc, mấy:00hr, ?]                                                                      [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay)]
-LA nmod                    [root, bay, từ]                          [hồ_chí_minh, lúc, mấy:00hr, ?]                                                                      [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), nmod(hồ_chí_minh->thành_phố)]
-RA from-loc                [root, bay, từ, hồ_chí_minh]             [lúc, mấy:00hr, ?]                                                                                   [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), nmod(hồ_chí_minh->thành_phố), from-loc(từ->hồ_chí_minh)]
-REDUCE                     [root, bay, từ]                          [lúc, mấy:00hr, ?]                                                                                   [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), nmod(hồ_chí_minh->thành_phố), from-loc(từ->hồ_chí_minh)]
-REDUCE                     [root, bay]                              [lúc, mấy:00hr, ?]                                                                                   [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), nmod(hồ_chí_minh->thành_phố), from-loc(từ->hồ_chí_minh)]
-SHIFT                      [root, bay, lúc]                         [mấy:00hr, ?]                                                                                        [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), nmod(hồ_chí_minh->thành_phố), from-loc(từ->hồ_chí_minh)]
-REDUCE                     [root, bay]                              [mấy:00hr, ?]                                                                                        [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), nmod(hồ_chí_minh->thành_phố), from-loc(từ->hồ_chí_minh)]
-SHIFT                      [root, bay, mấy:00hr]                    [?]                                                                                                  [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), nmod(hồ_chí_minh->thành_phố), from-loc(từ->hồ_chí_minh)]
-REDUCE                     [root, bay]                              [?]                                                                                                  [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), nmod(hồ_chí_minh->thành_phố), from-loc(từ->hồ_chí_minh)]
-RA punc                    [root, bay, ?]                           []                                                                                                   [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), nmod(hồ_chí_minh->thành_phố), from-loc(từ->hồ_chí_minh), punc(bay->?)]
-
-
-Question 8:
-ACTION                    STACK                                    BUFFER                                                                                               ARCS
-                           [root]                                   [máy_bay, nào, bay, từ, thành_phố, hồ_chí_minh, đến, hà_nội]                                         []
-SHIFT                      [root, máy_bay]                          [nào, bay, từ, thành_phố, hồ_chí_minh, đến, hà_nội]                                                  []
-RA which                   [root, máy_bay, nào]                     [bay, từ, thành_phố, hồ_chí_minh, đến, hà_nội]                                                       [which(máy_bay->nào)]
-REDUCE                     [root, máy_bay]                          [bay, từ, thành_phố, hồ_chí_minh, đến, hà_nội]                                                       [which(máy_bay->nào)]
-LA nsub                    [root]                                   [bay, từ, thành_phố, hồ_chí_minh, đến, hà_nội]                                                       [which(máy_bay->nào), nsub(bay->máy_bay)]
-RA root                    [root, bay]                              [từ, thành_phố, hồ_chí_minh, đến, hà_nội]                                                            [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay)]
-SHIFT                      [root, bay, từ]                          [thành_phố, hồ_chí_minh, đến, hà_nội]                                                                [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay)]
-SHIFT                      [root, bay, từ, thành_phố]               [hồ_chí_minh, đến, hà_nội]                                                                           [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay)]
-LA nmod                    [root, bay, từ]                          [hồ_chí_minh, đến, hà_nội]                                                                           [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), nmod(hồ_chí_minh->thành_phố)]
-RA from-loc                [root, bay, từ, hồ_chí_minh]             [đến, hà_nội]                                                                                        [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), nmod(hồ_chí_minh->thành_phố), from-loc(từ->hồ_chí_minh)]
-REDUCE                     [root, bay, từ]                          [đến, hà_nội]                                                                                        [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), nmod(hồ_chí_minh->thành_phố), from-loc(từ->hồ_chí_minh)]
-SHIFT                      [root, bay, từ, đến]                     [hà_nội]                                                                                             [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), nmod(hồ_chí_minh->thành_phố), from-loc(từ->hồ_chí_minh)]
-RA to-loc                  [root, bay, từ, đến, hà_nội]             []                                                                                                   [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), nmod(hồ_chí_minh->thành_phố), from-loc(từ->hồ_chí_minh), to-loc(đến->hà_nội)]
-
-
-Question 9:
-ACTION                    STACK                                    BUFFER                                                                                               ARCS
-                           [root]                                   [máy_bay, vn4, bay, từ, đà_nẵng]                                                                     []
-SHIFT                      [root, máy_bay]                          [vn4, bay, từ, đà_nẵng]                                                                              []
-RA nmod                    [root, máy_bay, vn4]                     [bay, từ, đà_nẵng]                                                                                   [nmod(máy_bay->vn4)]
-REDUCE                     [root, máy_bay]                          [bay, từ, đà_nẵng]                                                                                   [nmod(máy_bay->vn4)]
-LA nsub                    [root]                                   [bay, từ, đà_nẵng]                                                                                   [nmod(máy_bay->vn4), nsub(bay->máy_bay)]
-RA root                    [root, bay]                              [từ, đà_nẵng]                                                                                        [nmod(máy_bay->vn4), nsub(bay->máy_bay), root(root->bay)]
-SHIFT                      [root, bay, từ]                          [đà_nẵng]                                                                                            [nmod(máy_bay->vn4), nsub(bay->máy_bay), root(root->bay)]
-RA from-loc                [root, bay, từ, đà_nẵng]                 []                                                                                                   [nmod(máy_bay->vn4), nsub(bay->máy_bay), root(root->bay), from-loc(từ->đà_nẵng)]
-
-
-Question 10:
 ACTION                    STACK                                    BUFFER                                                                                               ARCS
                            [root]                                   [thời_gian, máy_bay, vj5, bay, từ, thành_phố, hà_nội, đến, khánh_hòa, mất, mấy:00hr, ?]              []
 SHIFT                      [root, thời_gian]                        [máy_bay, vj5, bay, từ, thành_phố, hà_nội, đến, khánh_hòa, mất, mấy:00hr, ?]                         []
@@ -195,7 +135,7 @@ REDUCE                     [root, bay, từ, đến]                     [?]    
 RA punc                    [root, bay, từ, đến, ?]                  []                                                                                                   [nmod(máy_bay->vj5), nsub(bay->máy_bay), root(root->bay), nmod(hà_nội->thành_phố), from-loc(từ->hà_nội), to-loc(đến->khánh_hòa), punc(đến->?)]
 
 
-Question 11:
+Question 8:
 ACTION                    STACK                                    BUFFER                                                                                               ARCS
                            [root]                                   [máy_bay, nào, bay, từ, hải_phòng, ?]                                                                []
 SHIFT                      [root, máy_bay]                          [nào, bay, từ, hải_phòng, ?]                                                                         []
@@ -210,7 +150,7 @@ REDUCE                     [root, bay]                              [?]         
 RA punc                    [root, bay, ?]                           []                                                                                                   [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), from-loc(từ->hải_phòng), punc(bay->?)]
 
 
-Question 12:
+Question 9:
 ACTION                    STACK                                    BUFFER                                                                                               ARCS
                            [root]                                   [máy_bay, của, hãng_hàng_không, vietjet_air, bay, đến, những, thành_phố, nào, ?]                     []
 SHIFT                      [root, máy_bay]                          [của, hãng_hàng_không, vietjet_air, bay, đến, những, thành_phố, nào, ?]                              []
@@ -232,7 +172,7 @@ REDUCE                     [root, bay, đến]                         [?]      
 RA punc                    [root, bay, đến, ?]                      []                                                                                                   [nsub(bay->máy_bay), root(root->bay), punc(đến->?)]
 
 
-Question 13:
+Question 10:
 ACTION                    STACK                                    BUFFER                                                                                               ARCS
                            [root]                                   [máy_bay, nào, bay, từ, hải_phòng, đến, khánh_hòa, ?]                                                []
 SHIFT                      [root, máy_bay]                          [nào, bay, từ, hải_phòng, đến, khánh_hòa, ?]                                                         []
@@ -249,7 +189,7 @@ REDUCE                     [root, bay, từ, đến]                     [?]    
 RA punc                    [root, bay, từ, đến, ?]                  []                                                                                                   [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), from-loc(từ->hải_phòng), to-loc(đến->hải_phòng), to-loc(đến->khánh_hòa), punc(đến->?)]
 
 
-Question 14:
+Question 11:
 ACTION                    STACK                                    BUFFER                                                                                               ARCS
                            [root]                                   [máy_bay, vj1, bay, từ, hcmc, 10:00hr, phải, ?]                                                      []
 SHIFT                      [root, máy_bay]                          [vj1, bay, từ, hcmc, 10:00hr, phải, ?]                                                               []
@@ -268,7 +208,30 @@ REDUCE                     [root, bay]                              [?]         
 RA punc                    [root, bay, ?]                           []                                                                                                   [nmod(máy_bay->vj1), nsub(bay->máy_bay), root(root->bay), punc(bay->?)]
 
 
-Question 15:
+Question 12:
+ACTION                    STACK                                    BUFFER                                                                                               ARCS
+                           [root]                                   [máy_bay, nào, bay, từ, thành_phố, hồ_chí_minh, đến, đà_nẵng, mất, 1:00hr, ?]                        []
+SHIFT                      [root, máy_bay]                          [nào, bay, từ, thành_phố, hồ_chí_minh, đến, đà_nẵng, mất, 1:00hr, ?]                                 []
+RA which                   [root, máy_bay, nào]                     [bay, từ, thành_phố, hồ_chí_minh, đến, đà_nẵng, mất, 1:00hr, ?]                                      [which(máy_bay->nào)]
+REDUCE                     [root, máy_bay]                          [bay, từ, thành_phố, hồ_chí_minh, đến, đà_nẵng, mất, 1:00hr, ?]                                      [which(máy_bay->nào)]
+LA nsub                    [root]                                   [bay, từ, thành_phố, hồ_chí_minh, đến, đà_nẵng, mất, 1:00hr, ?]                                      [which(máy_bay->nào), nsub(bay->máy_bay)]
+RA root                    [root, bay]                              [từ, thành_phố, hồ_chí_minh, đến, đà_nẵng, mất, 1:00hr, ?]                                           [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay)]
+SHIFT                      [root, bay, từ]                          [thành_phố, hồ_chí_minh, đến, đà_nẵng, mất, 1:00hr, ?]                                               [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay)]
+SHIFT                      [root, bay, từ, thành_phố]               [hồ_chí_minh, đến, đà_nẵng, mất, 1:00hr, ?]                                                          [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay)]
+LA nmod                    [root, bay, từ]                          [hồ_chí_minh, đến, đà_nẵng, mất, 1:00hr, ?]                                                          [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), nmod(hồ_chí_minh->thành_phố)]
+RA from-loc                [root, bay, từ, hồ_chí_minh]             [đến, đà_nẵng, mất, 1:00hr, ?]                                                                       [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), nmod(hồ_chí_minh->thành_phố), from-loc(từ->hồ_chí_minh)]
+REDUCE                     [root, bay, từ]                          [đến, đà_nẵng, mất, 1:00hr, ?]                                                                       [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), nmod(hồ_chí_minh->thành_phố), from-loc(từ->hồ_chí_minh)]
+SHIFT                      [root, bay, từ, đến]                     [đà_nẵng, mất, 1:00hr, ?]                                                                            [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), nmod(hồ_chí_minh->thành_phố), from-loc(từ->hồ_chí_minh)]
+RA to-loc                  [root, bay, từ, đến, đà_nẵng]            [mất, 1:00hr, ?]                                                                                     [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), nmod(hồ_chí_minh->thành_phố), from-loc(từ->hồ_chí_minh), to-loc(đến->đà_nẵng)]
+REDUCE                     [root, bay, từ, đến]                     [mất, 1:00hr, ?]                                                                                     [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), nmod(hồ_chí_minh->thành_phố), from-loc(từ->hồ_chí_minh), to-loc(đến->đà_nẵng)]
+SHIFT                      [root, bay, từ, đến, mất]                [1:00hr, ?]                                                                                          [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), nmod(hồ_chí_minh->thành_phố), from-loc(từ->hồ_chí_minh), to-loc(đến->đà_nẵng)]
+RA run-time                [root, bay, từ, đến, mất, 1:00hr]        [?]                                                                                                  [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), nmod(hồ_chí_minh->thành_phố), from-loc(từ->hồ_chí_minh), to-loc(đến->đà_nẵng), run-time(mất->1:00hr)]
+REDUCE                     [root, bay, từ, đến, mất]                [?]                                                                                                  [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), nmod(hồ_chí_minh->thành_phố), from-loc(từ->hồ_chí_minh), to-loc(đến->đà_nẵng), run-time(mất->1:00hr)]
+REDUCE                     [root, bay, từ, đến]                     [?]                                                                                                  [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), nmod(hồ_chí_minh->thành_phố), from-loc(từ->hồ_chí_minh), to-loc(đến->đà_nẵng), run-time(mất->1:00hr)]
+RA punc                    [root, bay, từ, đến, ?]                  []                                                                                                   [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), nmod(hồ_chí_minh->thành_phố), from-loc(từ->hồ_chí_minh), to-loc(đến->đà_nẵng), run-time(mất->1:00hr), punc(đến->?)]
+
+
+Question 13:
 ACTION                    STACK                                    BUFFER                                                                                               ARCS
                            [root]                                   [máy_bay, nào, của, vnairline, nào, bay, từ, thành_phố, hcm, ra, huế, mất, 1:00hr, ?]                []
 SHIFT                      [root, máy_bay]                          [nào, của, vnairline, nào, bay, từ, thành_phố, hcm, ra, huế, mất, 1:00hr, ?]                         []
@@ -299,7 +262,7 @@ REDUCE                     [root, bay]                              [?]         
 RA punc                    [root, bay, ?]                           []                                                                                                   [which(máy_bay->nào), which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), to-loc(ra->huế), run-time(mất->1:00hr), punc(bay->?)]
 
 
-Question 16:
+Question 14:
 ACTION                    STACK                                    BUFFER                                                                                               ARCS
                            [root]                                   [máy_bay, vj5, bay, từ, hà_nội, lúc, mấy:00hr, ?]                                                    []
 SHIFT                      [root, máy_bay]                          [vj5, bay, từ, hà_nội, lúc, mấy:00hr, ?]                                                             []
@@ -318,7 +281,7 @@ REDUCE                     [root, bay]                              [?]         
 RA punc                    [root, bay, ?]                           []                                                                                                   [nmod(máy_bay->vj5), nsub(bay->máy_bay), root(root->bay), from-loc(từ->hà_nội), punc(bay->?)]
 
 
-Question 17:
+Question 15:
 ACTION                    STACK                                    BUFFER                                                                                               ARCS
                            [root]                                   [máy_bay, nào, đến, huế, ?]                                                                          []
 SHIFT                      [root, máy_bay]                          [nào, đến, huế, ?]                                                                                   []
@@ -331,11 +294,11 @@ REDUCE                     [root, đến]                              [?]      
 RA punc                    [root, đến, ?]                           []                                                                                                   [which(máy_bay->nào), nsub(đến->máy_bay), root(root->đến), to-loc(đến->huế), punc(đến->?)]
 
 
-Question 18:
+Question 16:
 ACTION                    STACK                                    BUFFER                                                                                               ARCS
                            [root]                                   [máy_bay, nào, cất_cánh, từ, thành_phố, hồ_chí_minh, ?]                                              []
 REDUCE                     []                                       [máy_bay, nào, cất_cánh, từ, thành_phố, hồ_chí_minh, ?]                                              []
-Question 19:
+Question 17:
 ACTION                    STACK                                    BUFFER                                                                                               ARCS
                            [root]                                   [máy_bay, nào, bay, từ, đà_nẵng, ra, khánh_hòa, thời_gian, bao_lâu, ?]                               []
 SHIFT                      [root, máy_bay]                          [nào, bay, từ, đà_nẵng, ra, khánh_hòa, thời_gian, bao_lâu, ?]                                        []
@@ -358,7 +321,7 @@ REDUCE                     [root, bay]                              [?]         
 RA punc                    [root, bay, ?]                           []                                                                                                   [which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), from-loc(từ->đà_nẵng), to-loc(ra->khánh_hòa), nmod(bao_lâu->thời_gian), wh-time(bay->bao_lâu), punc(bay->?)]
 
 
-Question 20:
+Question 18:
 ACTION                    STACK                                    BUFFER                                                                                               ARCS
                            [root]                                   [máy_bay, vn2, bay, từ, đà_nẵng, lúc, mấy:00hr, ?]                                                   []
 SHIFT                      [root, máy_bay]                          [vn2, bay, từ, đà_nẵng, lúc, mấy:00hr, ?]                                                            []
@@ -377,7 +340,7 @@ REDUCE                     [root, bay]                              [?]         
 RA punc                    [root, bay, ?]                           []                                                                                                   [nmod(máy_bay->vn2), nsub(bay->máy_bay), root(root->bay), from-loc(từ->đà_nẵng), punc(bay->?)]
 
 
-Question 21:
+Question 19:
 ACTION                    STACK                                    BUFFER                                                                                               ARCS
                            [root]                                   [mấy, máy_bay, bay, đến, hà_nội, kể, tên, máy_bay, !]                                                []
 SHIFT                      [root, mấy]                              [máy_bay, bay, đến, hà_nội, kể, tên, máy_bay, !]                                                     []
@@ -397,7 +360,7 @@ REDUCE                     [root, bay, đến]                         [!]      
 REDUCE                     [root, bay]                              [!]                                                                                                  [nsub(bay->máy_bay), root(root->bay), to-loc(đến->hà_nội), nsub(đến->máy_bay)]
 REDUCE                     [root]                                   [!]                                                                                                  [nsub(bay->máy_bay), root(root->bay), to-loc(đến->hà_nội), nsub(đến->máy_bay)]
 REDUCE                     []                                       [!]                                                                                                  [nsub(bay->máy_bay), root(root->bay), to-loc(đến->hà_nội), nsub(đến->máy_bay)]
-Question 22:
+Question 20:
 ACTION                    STACK                                    BUFFER                                                                                               ARCS
                            [root]                                   [máy_bay, nào, bay, từ, hà_nội, đến, thành_phố, hồ_chí_minh, ?]                                      []
 SHIFT                      [root, máy_bay]                          [nào, bay, từ, hà_nội, đến, thành_phố, hồ_chí_minh, ?]                                               []

@@ -387,3 +387,4 @@ class ProcedureFormParser:
             buffer += ')'
 
         self.write_to_file(buffer)
+        self.write_to_file('\n')
