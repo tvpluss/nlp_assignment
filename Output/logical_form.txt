@@ -1,0 +1,24 @@
+    WH ?m1
+    FLIGHT ?m1
+    SOURCE ?m1 đà_nẵng
+    DEST ?m1 CITY-hồ_chí_minh
+    RUN-TIME ?m1 1
+
+
+    WH ?m1
+    FLIGHT ?m1
+    DEST ?m1 CITY-huế
+
+
+    WH ?m1
+    FLIGHT ?m1
+    SOURCE ?m1 đà_nẵng
+    DEST ?m1 khánh_hòa
+    RUN-TIME ?m1 ?t1
+
+
+    WH ?m1
+    FLIGHT ?m1
+    SOURCE ?m1 CITY-hồ_chí_minh
+    DEST ?m1 hà_nội
+

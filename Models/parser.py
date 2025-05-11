@@ -1,6 +1,7 @@
 dependency_parsing_file = 'Output/dependency_parsing.txt'
 grammar_relation_file = 'Output/grammar_relation.txt'
 arcs_file = 'Output/arcs.txt'
+logical_form_file = 'Output/logical_form.txt'
 class Relation:
     # A relation arc of left -> right
     def __init__(self, left: str, relation_name: str, right: str):
@@ -138,6 +139,16 @@ class MaltParser:
                 else:
                     self.left_arc(left_rel.relation_name)
                 
+class Token:
+    def __init__(self, word:str, type:str):
+        self.word = word
+        self.type = type
+        self.children: list[Token] = []
+
+    def __str__(self):
+        return f'{self.word} ({self.type})'
+
+
 
 class GrammarRelation:
     def __init__(self, arcs: list[Relation]):
@@ -148,24 +159,111 @@ class GrammarRelation:
         print(content, file=self.file)
 
     def parse(self):
+        # Handle which flight question first
+        parsed_tree = Token('m1', 'ROOT')
         for arc in self.arcs:
             if arc.relation_name == 'which':
+                parsed_tree.children.append(Token(arc.left, 'WHICH'))
                 self.write_to_file(f'{str(arc): <40} -> (WHICH m1 {arc.left})')
             elif arc.relation_name == 'nsub':
+                parsed_tree.children.append(Token(arc.left, 'LSUB'))
                 self.write_to_file(f'{str(arc): <40} -> (m1 PRED {arc.left})(m1 LSUB {arc.right})')
-            elif arc.relation_name == 'loc-obj':
+            elif arc.relation_name == 'to-loc':
                 has_city = False
                 # check for city nmod
                 if Relation(arc.right, 'nmod', 'thành_phố') in self.arcs:
                     has_city = True
-                # check if relation is from or to
-                if arc.left in ['đến', 'ra']:
-                    self.write_to_file(f'{str(arc): <40} -> (m1 TO-LOC {'thành_phố-' if has_city else ''}{arc.right})')
-                else:
-                    self.write_to_file(f'{str(arc): <40} -> (m1 FROM-LOC {'thành_phố-' if has_city else ''}{arc.right})')
+                token = Token(arc.right, 'DEST')
                 if has_city:
-                    self.write_to_file(f'{str(Relation('thành_phố', 'nmod', arc.right)): <40}')
+                    token.children.append(Token('thành_phố', 'CITY'))
+                parsed_tree.children.append(token)
+                self.write_to_file(f'{str(arc): <40} -> (m1 TO-LOC {'thành_phố-' if has_city else ''}{arc.right})')
+            elif arc.relation_name == 'from-loc':
+                has_city = False
+                # check for city nmod
+                if Relation(arc.right, 'nmod', 'thành_phố') in self.arcs:
+                    has_city = True
+                token = Token(arc.right, 'SOURCE')
+                if has_city:
+                    token.children.append(Token('thành_phố', 'CITY'))
+                parsed_tree.children.append(token)
+                self.write_to_file(f'{str(arc): <40} -> (m1 FROM-LOC {'thành_phố-' if has_city else ''}{arc.right})')
+            elif arc.relation_name == 'run-time':
+                parsed_tree.children.append(Token(arc.left, 'RUN-TIME'))
+                self.write_to_file(f'{str(arc): <40} -> (m1 RUN-TIME {arc.left})')
             elif arc.relation_name == 'at-time':
+                parsed_tree.children.append(Token(arc.right, 'AT-TIME'))
                 self.write_to_file(f'{str(arc): <40} -> (m1 AT-TIME {arc.right})')
+            elif arc.relation_name == 'wh-time':
+                parsed_tree.children.append(Token('m1', 'WH-TIME'))
+                self.write_to_file(f'{str(arc): <40} -> (WH-TIME m1)')
         self.write_to_file('\n')
-               
+        return parsed_tree
+
+class LogicalForm:
+    def __init__(self):
+        # None mean not specified
+        # start with ? mean requested
+        # other mean given
+        self.destination = None
+        self.source = None
+        self.run_time = None
+        self.at_time = None
+        self.which = None
+    
+    def __str__(self):
+        return f'from {self.source} to {self.destination} arrival {self.at_time} flight_time {self.run_time} which {self.which}'
+class ParseLogicalForm:
+    def __init__(self, tree: Token):
+        self.tree = tree
+        self.file = open(logical_form_file, 'a')
+    def write_to_file(self, content: str):
+        print(content, file=self.file)
+
+    def parse(self):
+        # recursively parse the tree
+        logical_form = LogicalForm()
+        self.parse_tree(self.tree, logical_form)
+        print(logical_form)
+        self.write_to_file('\n')
+
+    def parse_tree(self, node: Token, logical_form: LogicalForm, indent: int = 0):
+
+        if node.type == 'WHICH':
+            self.write_to_file(f'{indent * ' '}WH ?m1')
+            logical_form.which = '?m1'
+        elif node.type == 'LSUB':
+            self.write_to_file(f'{indent * ' '}FLIGHT ?m1')
+            logical_form.flight = '?m1'
+        elif node.type == 'WH-TIME':
+            self.write_to_file(f'{indent * ' '}RUN-TIME ?m1 ?t1')
+            logical_form.run_time = '?t1'
+        elif node.type == 'DEST':
+            buffer = ""
+            if len(node.children) > 0:
+                buffer = f'{indent * ' '}DEST ?m1 CITY-{node.word}'
+            else:
+                buffer = f'{indent * ' '}DEST ?m1 {node.word}'
+            self.write_to_file(buffer)
+            logical_form.destination = node.word
+            return
+        elif node.type == 'SOURCE':
+            buffer = ""
+            if len(node.children) > 0:
+                buffer = f'{indent * ' '}SOURCE ?m1 CITY-{node.word}'
+            else:
+                buffer = f'{indent * ' '}SOURCE ?m1 {node.word}'
+            self.write_to_file(buffer)
+            logical_form.source = node.word
+            return
+        elif node.type == 'AT-TIME':
+            self.write_to_file(f'{indent * ' '}AT-TIME ?t1')
+            logical_form.at_time = '?t1'
+            return
+        elif node.type == 'RUN-TIME':
+            self.write_to_file(f'{indent * ' '}RUN-TIME ?m1 {node.word}')
+            logical_form.run_time = node.word
+            return
+        if len(node.children) > 0:
+            for child in node.children:
+                self.parse_tree(child, logical_form, indent + 4)

@@ -1,20 +1,25 @@
 which(máy_bay->nào)                      -> (WHICH m1 máy_bay)
+nsub(bay->máy_bay)                       -> (m1 PRED bay)(m1 LSUB máy_bay)
+from-loc(từ->đà_nẵng)                    -> (m1 FROM-LOC đà_nẵng)
+to-loc(đến->hồ_chí_minh)                 -> (m1 TO-LOC thành_phố-hồ_chí_minh)
+run-time(1->mất)                         -> (m1 RUN-TIME 1)
+
+
+which(máy_bay->nào)                      -> (WHICH m1 máy_bay)
 nsub(đến->máy_bay)                       -> (m1 PRED đến)(m1 LSUB máy_bay)
-loc-obj(đến->huế)                        -> (m1 TO-LOC thành_phố-huế)
-nmod(thành_phố->huế)                    
-at-time(đến->13:30hr)                    -> (m1 AT-TIME 13:30hr)
+to-loc(đến->huế)                         -> (m1 TO-LOC thành_phố-huế)
 
 
 which(máy_bay->nào)                      -> (WHICH m1 máy_bay)
 nsub(bay->máy_bay)                       -> (m1 PRED bay)(m1 LSUB máy_bay)
-loc-obj(từ->đà_nẵng)                     -> (m1 FROM-LOC đà_nẵng)
-loc-obj(ra->khánh_hòa)                   -> (m1 TO-LOC khánh_hòa)
+from-loc(từ->đà_nẵng)                    -> (m1 FROM-LOC đà_nẵng)
+to-loc(ra->khánh_hòa)                    -> (m1 TO-LOC khánh_hòa)
+wh-time(bay->bao_lâu)                    -> (WH-TIME m1)
 
 
 which(máy_bay->nào)                      -> (WHICH m1 máy_bay)
 nsub(bay->máy_bay)                       -> (m1 PRED bay)(m1 LSUB máy_bay)
-loc-obj(từ->hồ_chí_minh)                 -> (m1 FROM-LOC thành_phố-hồ_chí_minh)
-nmod(thành_phố->hồ_chí_minh)            
-loc-obj(đến->hà_nội)                     -> (m1 TO-LOC hà_nội)
+from-loc(từ->hồ_chí_minh)                -> (m1 FROM-LOC thành_phố-hồ_chí_minh)
+to-loc(đến->hà_nội)                      -> (m1 TO-LOC hà_nội)
 
 

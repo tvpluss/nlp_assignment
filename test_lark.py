@@ -1,7 +1,7 @@
 from lark import Lark
 
 from Models.text_processing import postprocess_tokens, preprocess_query
-from Models.parser import GrammarRelation, MaltParser
+from Models.parser import GrammarRelation, ParseLogicalForm, MaltParser
 grammar = """
     start: WORD+
     WORD: CITY | NAME | NOUN | VERB | ADJ | ADV | CONJ | DET | PRON | PROPN | AIRLINE | PLANE | PUNCT | TIME | INTEGER | WH_TIME
@@ -26,11 +26,13 @@ grammar = """
 
 parser = Lark(grammar)
 # clean up output file
-with open("Output/parsing.txt", "w") as f:
+with open("Output/dependency_parsing.txt", "w") as f:
     f.truncate(0)
 with open("Output/arcs.txt", "w") as f:
     f.truncate(0)
 with open("Output/grammar_relation.txt", "w") as f:
+    f.truncate(0)
+with open("Output/logical_form.txt", "w") as f:
     f.truncate(0)
 with open("Input/query.txt", "r") as f:
     for line in f:
@@ -48,7 +50,9 @@ with open("Input/query.txt", "r") as f:
             arcs = malt_parser.parse()
 
             grammar_relation = GrammarRelation(arcs)
-            grammar_relation.parse()
+            rel = grammar_relation.parse()
+            logical_form = ParseLogicalForm(rel)
+            logical_form.parse()
 
             print('\n\n')
 

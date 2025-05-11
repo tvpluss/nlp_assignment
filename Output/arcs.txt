@@ -1,6 +1,8 @@
-which(máy_bay->nào), nsub(đến->máy_bay), root(root->đến), nmod(huế->thành_phố), loc-obj(đến->huế), nmod(13:30hr->lúc), at-time(đến->13:30hr), punc(đến->?)
+which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), from-loc(từ->đà_nẵng), nmod(hồ_chí_minh->thành_phố), to-loc(đến->hồ_chí_minh), run-time(1->mất), tmod(đến->1), nmod(1->hr), punc(đến->?)
 
-which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), loc-obj(từ->đà_nẵng), loc-obj(ra->khánh_hòa), wh-time(thời_gian->bao_lâu), punc(bay->?)
+which(máy_bay->nào), nsub(đến->máy_bay), root(root->đến), nmod(huế->thành_phố), to-loc(đến->huế), case(13:30hr->lúc), tmod(đến->13:30hr), punc(đến->?)
 
-which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), nmod(hồ_chí_minh->thành_phố), loc-obj(từ->hồ_chí_minh), loc-obj(đến->hà_nội), punc(đến->?)
+which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), from-loc(từ->đà_nẵng), to-loc(ra->khánh_hòa), nmod(bao_lâu->thời_gian), wh-time(bay->bao_lâu), punc(bay->?)
+
+which(máy_bay->nào), nsub(bay->máy_bay), root(root->bay), nmod(hồ_chí_minh->thành_phố), from-loc(từ->hồ_chí_minh), to-loc(đến->hà_nội), punc(đến->?)
 
