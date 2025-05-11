@@ -38,7 +38,7 @@ def add_root(text_list: list[str]) -> list[str]:
         text_list.insert(index, 'đi')
     return text_list
 
-removed_tokens = ['có', "không", "nếu_có", "thì", "là", ',']
+removed_tokens = ['có', "không", "nếu_có", "thì", "là", ',', 'hãy', 'cho_biết']
 def clean_text(texts: list[str]) -> list[str]:
     filtered_texts = [text for text in texts if text not in removed_tokens]
     return filtered_texts
@@ -55,6 +55,10 @@ def normalize_text(texts: list[str]) -> list[str]:
             for rough_text in rough_texts:
                 equivalents.setdefault(rough_text, normal_text)
     for i in range(len(texts)):
+        # convert 'x_hr' or 'x_giờ' to 'x:00hr'
+        if texts[i].endswith('_hr') or texts[i].endswith('_giờ'):
+            texts[i] = texts[i].replace('_hr', '').replace('_giờ', '')
+            texts[i] += ':00hr'
         if equivalents.get(texts[i]):
             texts[i] = equivalents[texts[i]]
     return texts

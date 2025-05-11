@@ -1,7 +1,7 @@
 from lark import Lark
 
 from Models.text_processing import postprocess_tokens, preprocess_query
-from Models.parser import GrammarRelation, ParseLogicalForm, MaltParser
+from Models.parser import GrammarRelation, ParseLogicalForm, MaltParser, ProcedureFormParser, clean_output_files
 grammar = """
     start: WORD+
     WORD: CITY | NAME | NOUN | VERB | ADJ | ADV | CONJ | DET | PRON | PROPN | AIRLINE | PLANE | PUNCT | TIME | INTEGER | WH_TIME
@@ -17,7 +17,7 @@ grammar = """
     PROPN: "vietjet air" | "vietnam airlines" | "vnairline"
     AIRLINE: "vietjet air" | "vietnam airlines" | "vnairline"
     PLANE: "vn1" | "vn2" | "vn3" | "vn4" | "vn5" | "vj1" | "vj2" | "vj3" | "vj4" | "vj5"
-    TIME: INTEGER ":" INTEGER "hr"
+    TIME: (INTEGER ":" INTEGER "hr") | (INTEGER " giờ") | (INTEGER " hr")
     WH_TIME: "mấy giờ" | "bao lâu"
     INTEGER: /[0-9]+/
     PUNCT: "." | "?" | "," | "!"
@@ -25,17 +25,12 @@ grammar = """
 """
 
 parser = Lark(grammar)
-# clean up output file
-with open("Output/dependency_parsing.txt", "w") as f:
-    f.truncate(0)
-with open("Output/arcs.txt", "w") as f:
-    f.truncate(0)
-with open("Output/grammar_relation.txt", "w") as f:
-    f.truncate(0)
-with open("Output/logical_form.txt", "w") as f:
-    f.truncate(0)
+clean_output_files()
+
 with open("Input/query.txt", "r") as f:
+    index = 0
     for line in f:
+        index += 1
         if line == '\n':
             print('manual break')
             break
@@ -45,14 +40,17 @@ with open("Input/query.txt", "r") as f:
             tokens = parser.lex(preprocessed_query)
             postprocessed_tokens = postprocess_tokens(tokens)
             print(f'preprocessed tokens: {postprocessed_tokens}')
-            malt_parser = MaltParser(buffer=postprocessed_tokens)
+            malt_parser = MaltParser(buffer=postprocessed_tokens, index=index)
             print('parsing')
             arcs = malt_parser.parse()
 
-            grammar_relation = GrammarRelation(arcs)
+            grammar_relation = GrammarRelation(arcs, index)
             rel = grammar_relation.parse()
-            logical_form = ParseLogicalForm(rel)
-            logical_form.parse()
+            logical_form_parser = ParseLogicalForm(rel, index)
+            logical_form = logical_form_parser.parse()
+
+            procedure_form_parser = ProcedureFormParser(logical_form, index)
+            procedure_form = procedure_form_parser.parse()
 
             print('\n\n')
 

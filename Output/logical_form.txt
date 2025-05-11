@@ -1,24 +1,128 @@
+Question 1:
     WH ?m1
     FLIGHT ?m1
-    SOURCE ?m1 đà_nẵng
-    DEST ?m1 CITY-hồ_chí_minh
-    RUN-TIME ?m1 1
+    SOURCE ?m1 (NAME đà_nẵng)
+    DEST ?m1 (NAME CITY-hồ_chí_minh)
+    RUN-TIME ?m1 1:00hr
 
 
+Question 2:
     WH ?m1
     FLIGHT ?m1
-    DEST ?m1 CITY-huế
+    SOURCE ?m1 (NAME CITY-hồ_chí_minh)
+    DEST ?m1 (NAME đà_nẵng)
+    RUN-TIME ?m1 1:00hr
 
 
+Question 3:
     WH ?m1
     FLIGHT ?m1
-    SOURCE ?m1 đà_nẵng
-    DEST ?m1 khánh_hòa
+    DEST ?m1 (NAME CITY-huế)
+    AT-TIME ?m1 13:30hr
+
+
+Question 4:
+    WH ?m1
+    FLIGHT ?m1
+    SOURCE ?m1 (NAME đà_nẵng)
+    DEST ?m1 (NAME khánh_hòa)
     RUN-TIME ?m1 ?t1
 
 
+Question 5:
     WH ?m1
     FLIGHT ?m1
-    SOURCE ?m1 CITY-hồ_chí_minh
-    DEST ?m1 hà_nội
+    SOURCE ?m1 (NAME CITY-hồ_chí_minh)
+    DEST ?m1 (NAME hà_nội)
+
+
+Question 6:
+    FLIGHT ?m1
+    DEST ?m1 (NAME huế)
+
+
+Question 7:
+    WH ?m1
+    FLIGHT ?m1
+    SOURCE ?m1 (NAME CITY-hồ_chí_minh)
+
+
+Question 8:
+    WH ?m1
+    FLIGHT ?m1
+    SOURCE ?m1 (NAME CITY-hồ_chí_minh)
+    DEST ?m1 (NAME hà_nội)
+
+
+Question 9:
+    FLIGHT (NAME vn4)
+    SOURCE ?m1 (NAME đà_nẵng)
+
+
+Question 10:
+    FLIGHT (NAME vj5)
+    SOURCE ?m1 (NAME CITY-hà_nội)
+    DEST ?m1 (NAME khánh_hòa)
+
+
+Question 11:
+    WH ?m1
+    FLIGHT ?m1
+    SOURCE ?m1 (NAME hải_phòng)
+
+
+Question 12:
+    FLIGHT ?m1
+
+
+Question 13:
+    WH ?m1
+    FLIGHT ?m1
+    SOURCE ?m1 (NAME hải_phòng)
+    DEST ?m1 (NAME hải_phòng)
+    DEST ?m1 (NAME khánh_hòa)
+
+
+Question 14:
+    FLIGHT (NAME vj1)
+
+
+Question 15:
+    WH ?m1
+    WH ?m1
+    FLIGHT ?m1
+    DEST ?m1 (NAME huế)
+    RUN-TIME ?m1 1:00hr
+
+
+Question 16:
+    FLIGHT (NAME vj5)
+    SOURCE ?m1 (NAME hà_nội)
+
+
+Question 17:
+    WH ?m1
+    FLIGHT ?m1
+    DEST ?m1 (NAME huế)
+
+
+Question 19:
+    WH ?m1
+    FLIGHT ?m1
+    SOURCE ?m1 (NAME đà_nẵng)
+    DEST ?m1 (NAME khánh_hòa)
+    RUN-TIME ?m1 ?t1
+
+
+Question 20:
+    FLIGHT (NAME vn2)
+    SOURCE ?m1 (NAME đà_nẵng)
+
+
+Question 22:
+    WH ?m1
+    FLIGHT ?m1
+    SOURCE ?m1 (NAME hà_nội)
+    DEST ?m1 (NAME CITY-hồ_chí_minh)
+
 

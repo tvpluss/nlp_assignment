@@ -1,3 +1,4 @@
 hạ_cánh_ở->đến
+xuất_phát->bay
 tp.->thành_phố
 giờ->hr
