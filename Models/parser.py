@@ -1,8 +1,8 @@
-dependency_parsing_file = 'Output/dependency_parsing.txt'
-grammar_relation_file = 'Output/grammar_relation.txt'
-arcs_file = 'Output/arcs.txt'
-logical_form_file = 'Output/logical_form.txt'
-procedure_form_file = 'Output/procedure_form.txt'
+dependency_parsing_file = 'Output/a.txt'
+grammar_relation_file = 'Output/c.txt'
+arcs_file = 'Output/b.txt'
+logical_form_file = 'Output/d.txt'
+procedure_form_file = 'Output/e.txt'
 
 def clean_output_files():
     with open(dependency_parsing_file, 'w') as f:
@@ -169,7 +169,7 @@ class Token:
 
 
 
-class GrammarRelation:
+class GrammarRelationParser:
     def __init__(self, arcs: list[Relation], index: int):
         self.index = index
         self.arcs = arcs
@@ -251,7 +251,7 @@ class LogicalForm:
     
     def __str__(self):
         return f'from {self.source} to {self.destination} arrival {self.at_time} flight_time {self.run_time} departure {self.d_time} which {self.which}'
-class ParseLogicalForm:
+class LogicalFormParser:
     def __init__(self, tree: Token, index: int):
         self.index = index
         self.tree = tree
@@ -264,7 +264,6 @@ class ParseLogicalForm:
         # recursively parse the tree
         logical_form = LogicalForm()
         self.parse_tree(self.tree, logical_form)
-        print(logical_form)
         self.write_to_file('\n')
         return logical_form
 
